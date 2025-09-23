@@ -22,6 +22,17 @@ resource "aws_instance" "my_server" {
   }
 }
 
+terraform { 
+  required_version = ">=1.11.0"
+
+  backend "s3" {
+    bucket  = "ah-rit-terraform"
+    key     = "activity_code/terraform.sfstate"
+    region  = "us-east-1" 
+    encrypt = true
+  }
+}
+
 
 output "public_ip" {
   value = aws_instance.my_server.public_ip
