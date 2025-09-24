@@ -8,7 +8,7 @@ locals {
   aws_key = "AH_AWS_KEY_PAIR" # SSH key pair name for EC2 instance access
 }
 
-resource "aws_security_group_new" "allow_http_ssh" {
+resource "aws_security_group" "allow_http_ssh" {
   name = "allow_http"
   description = "allow http" 
 
@@ -42,13 +42,15 @@ resource "aws_instance" "my_server" {
   key_name      = local.aws_key               # Specify the SSH key pair name
 
   user_data       = file("wp_install.sh")
-  security_groups = [aws_security_group_new.allow_http_ssh.name]
+  security_groups = [aws_security_group.allow_http_ssh.name]
 
   # Add tags to the EC2 instance for identification
   tags = {
     Name = "my ec2"
   }
 }
+
+
 
 output "public_ip" {
   value = aws_instance.my_server.public_ip
