@@ -50,6 +50,15 @@ resource "aws_instance" "my_server" {
   }
 }
 
+terraform {
+  
+  backend "s3" {
+    bucket = "ah-rit-terraform"
+    key = "prod/terraform.tfstate"
+    region = "us-east-1"
+    encrypt = true
+  }
+}
 
 
 output "public_ip" {
