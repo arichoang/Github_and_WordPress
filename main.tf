@@ -9,7 +9,7 @@ locals {
 }
 
 resource "aws_security_group" "allow_http_ssh" {
-  name = "allow_http"
+  name = "allow_http_new"
   description = "allow http" 
 
   ingress {
