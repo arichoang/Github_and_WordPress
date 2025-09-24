@@ -52,17 +52,15 @@ resource "aws_instance" "my_server" {
 
 terraform {
   required_version = ">= 1.11.0"
-  
+
   backend "s3" {
-    bucket = "my-terraform-state-bucket” # S3 bucket for state storage
-    key = "prod/terraform.tfstate” # State file path in the bucket
-    region = "us-east-1” # AWS region
-  encrypt = true
+    bucket = "my-terraform-state-bucket"
+    key    = "prod/terraform.tfstate"
+    region = "us-east-1"
+    encrypt = true
   }
 }
-
 
 output "public_ip" {
   value = aws_instance.my_server.public_ip
 }
-
